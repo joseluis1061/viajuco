@@ -1,0 +1,28 @@
+// _light-theme.scss
+@import '../global/variables';
+@import '../global/mixins';
+
+// Colores para el tema claro (generalmente los valores por defecto de las variables)
+// Colores para el tema oscuro
+$primary-light: #2196F3; // Ajusta según tus preferencias
+$secondary-light: #607D8B;
+
+// Estilos globales para el tema claro
+body {
+  background-color: $light-color;
+  color: $dark-color;
+}
+
+// Estilos específicos para elementos en el tema claro
+.card {
+  background-color: $light-color;
+  box-shadow: $box-shadow-sm;
+}
+
+// ... otros estilos específicos para el tema claro
+
+// Utilizando mixins para personalizar estilos
+// .light-button {
+  //@include background($primary-light);
+  //color: $light-color;
+// }
