@@ -32,6 +32,7 @@
               }
             ],
             "styles": [
+              "src/styles/main.scss",
               "src/styles.scss"
             ],
             "scripts": [],
@@ -39,8 +40,14 @@
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
+            },
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
             }
           },
+
           "configurations": {
             "production": {
               "budgets": [

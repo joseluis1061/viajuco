@@ -1,0 +1,26 @@
+@import '../styles/main.scss';
+//@import '../styles/global/mixins';
+.card {
+  background-color: red;
+  @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
+
+  .card-content {
+    @include flexbox(column, center, center);
+    @include transition(background-color);
+
+    &:hover {
+      @include gradient($primary-color, darken($primary-color, 15%));
+    }
+  }
+
+  .card-title {
+    @include text-truncate;
+  }
+}
+
+.sidebar {
+  @include respond-to('md') {
+    @include absolute($top: 0, $left: 0);
+    @include size(250px, 100vh);
+  }
+}

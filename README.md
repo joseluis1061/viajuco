@@ -1,6 +1,10 @@
 # Viajuco
 
-Angular CLI version 18.0.1.
+Angular CLI version 18.0.1. 
+NPM version 20.13.1
+
+## Instalar
+Descargue el proyecto y ejecute npm install
 
 ## Development server
 

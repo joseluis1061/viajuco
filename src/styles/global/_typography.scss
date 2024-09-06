@@ -1,0 +1,118 @@
+
+
+// Importamos las variables si no están disponibles globalmente
+@import 'variables';
+
+// Estilos base para el body
+body {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
+  line-height: 1.5;
+  color: $text-color;
+}
+
+// Estilos para encabezados
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: $spacer;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+}
+
+h1 { font-size: $font-size-base * 2.5; }
+h2 { font-size: $font-size-base * 2; }
+h3 { font-size: $font-size-base * 1.75; }
+h4 { font-size: $font-size-base * 1.5; }
+h5 { font-size: $font-size-base * 1.25; }
+h6 { font-size: $font-size-base; }
+
+// Estilos para párrafos
+p {
+  margin-top: 0;
+  margin-bottom: $spacer;
+}
+
+// Estilos para listas
+ul, ol {
+  margin-top: 0;
+  margin-bottom: $spacer;
+  padding-left: $spacer * 2;
+}
+
+// Estilos para enlaces
+a {
+  color: $primary-color;
+  text-decoration: none;
+
+  &:hover {
+    color: darken($primary-color, 15%);
+    text-decoration: underline;
+  }
+}
+
+// Estilos para texto en negrita e itálica
+strong, b {
+  font-weight: $font-weight-bold;
+}
+
+em, i {
+  font-style: italic;
+}
+
+// Estilos para citas
+blockquote {
+  margin: 0 0 $spacer;
+  padding: $spacer;
+  border-left: 5px solid $gray-300;
+  font-style: italic;
+  color: $gray-600;
+}
+
+// Estilos para código inline y bloques de código
+code {
+  font-family: $font-family-monospace;
+  font-size: 87.5%;
+  color: $danger-color;
+  word-break: break-word;
+}
+
+pre {
+  display: block;
+  font-family: $font-family-monospace;
+  font-size: 87.5%;
+  color: $gray-900;
+  margin-top: 0;
+  margin-bottom: $spacer;
+  overflow: auto;
+
+  code {
+    font-size: inherit;
+    color: inherit;
+    word-break: normal;
+  }
+}
+
+// Clases de utilidad para texto
+.text-muted { color: $text-muted; }
+.text-primary { color: $primary-color; }
+.text-success { color: $success-color; }
+.text-info { color: $info-color; }
+.text-warning { color: $warning-color; }
+.text-danger { color: $danger-color; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-uppercase { text-transform: uppercase; }
+.text-lowercase { text-transform: lowercase; }
+.text-capitalize { text-transform: capitalize; }
+
+// Responsive font sizes
+@media (max-width: $breakpoint-sm) {
+  html { font-size: 14px; }
+}
+
+@media (min-width: $breakpoint-xl) {
+  html { font-size: 18px; }
+}

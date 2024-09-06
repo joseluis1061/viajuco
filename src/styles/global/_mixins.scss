@@ -1,0 +1,74 @@
+// Importamos las variables si no están disponibles globalmente
+@import 'variables';
+
+// Mixin para flexbox
+@mixin flexbox($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+// Mixin para posicionamiento absoluto
+@mixin absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// Mixin para tamaño
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+// Mixin para transiciones
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+// Mixin para media queries
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "sm" {
+    @media (min-width: $breakpoint-sm) { @content; }
+  }
+  @else if $breakpoint == "md" {
+    @media (min-width: $breakpoint-md) { @content; }
+  }
+  @else if $breakpoint == "lg" {
+    @media (min-width: $breakpoint-lg) { @content; }
+  }
+  @else if $breakpoint == "xl" {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+}
+
+// Mixin para truncar texto
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Mixin para clearfix
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// Mixin para sombras
+@mixin box-shadow($shadow...) {
+  box-shadow: $shadow;
+}
+
+// Mixin para gradientes
+@mixin gradient($start-color, $end-color, $direction: to bottom) {
+  background: $start-color;
+  background: linear-gradient($direction, $start-color, $end-color);
+}
