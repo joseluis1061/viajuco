@@ -1,0 +1,132 @@
+// src/styles/utilities/_spacing.scss
+
+// Spacing scale
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,  // 0.25rem
+  2: $spacer * 0.5,   // 0.5rem
+  3: $spacer,         // 1rem
+  4: $spacer * 1.5,   // 1.5rem
+  5: $spacer * 3,     // 3rem
+  6: $spacer * 4,     // 4rem
+  7: $spacer * 5,     // 5rem
+  8: $spacer * 6,     // 6rem
+);
+
+// Sides
+$sides: (
+  "": "",
+  "t": "-top",
+  "r": "-right",
+  "b": "-bottom",
+  "l": "-left",
+  "x": "-left" "-right",
+  "y": "-top" "-bottom"
+);
+
+// Properties
+$properties: (
+  "m": "margin",
+  "p": "padding"
+);
+
+// Generate spacing utilities
+@each $prop-short, $prop in $properties {
+  @each $side-short, $side in $sides {
+    @each $size, $value in $spacers {
+      .#{$prop-short}#{$side-short}-#{$size} {
+        @each $s in $side {
+          #{$prop}#{$s}: $value !important;
+        }
+      }
+    }
+  }
+}
+
+// Generate negative margin utilities
+@each $size, $value in $spacers {
+  @if $size != 0 {
+    .m-n#{$size} {
+      margin: -$value !important;
+    }
+    .mt-n#{$size},
+    .my-n#{$size} {
+      margin-top: -$value !important;
+    }
+    .mr-n#{$size},
+    .mx-n#{$size} {
+      margin-right: -$value !important;
+    }
+    .mb-n#{$size},
+    .my-n#{$size} {
+      margin-bottom: -$value !important;
+    }
+    .ml-n#{$size},
+    .mx-n#{$size} {
+      margin-left: -$value !important;
+    }
+  }
+}
+
+// Auto margins
+.m-auto { margin: auto !important; }
+.mt-auto,
+.my-auto {
+  margin-top: auto !important;
+}
+.mr-auto,
+.mx-auto {
+  margin-right: auto !important;
+}
+.mb-auto,
+.my-auto {
+  margin-bottom: auto !important;
+}
+.ml-auto,
+.mx-auto {
+  margin-left: auto !important;
+}
+
+// Responsive spacing utilities
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px
+);
+
+@each $breakpoint, $width in $breakpoints {
+  @media (min-width: $width) {
+    @each $prop-short, $prop in $properties {
+      @each $side-short, $side in $sides {
+        @each $size, $value in $spacers {
+          .#{$prop-short}#{$side-short}-#{$breakpoint}-#{$size} {
+            @each $s in $side {
+              #{$prop}#{$s}: $value !important;
+            }
+          }
+        }
+      }
+    }
+
+    // Responsive auto margins
+    .m-#{$breakpoint}-auto { margin: auto !important; }
+    .mt-#{$breakpoint}-auto,
+    .my-#{$breakpoint}-auto {
+      margin-top: auto !important;
+    }
+    .mr-#{$breakpoint}-auto,
+    .mx-#{$breakpoint}-auto {
+      margin-right: auto !important;
+    }
+    .mb-#{$breakpoint}-auto,
+    .my-#{$breakpoint}-auto {
+      margin-bottom: auto !important;
+    }
+    .ml-#{$breakpoint}-auto,
+    .mx-#{$breakpoint}-auto {
+      margin-left: auto !important;
+    }
+  }
+}

@@ -1,0 +1,154 @@
+// src/styles/utilities/_responsive.scss
+
+// Breakpoints
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px
+);
+
+// Mixin for media queries
+@mixin breakpoint($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}.";
+  }
+}
+
+// Function to calculate max-width for down media queries
+@function breakpoint-down($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @return map-get($breakpoints, $breakpoint) - 0.02;
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}.";
+    @return null;
+  }
+}
+
+// Responsive visibility classes
+@each $breakpoint, $value in $breakpoints {
+  .hidden-#{$breakpoint}-up {
+    @include breakpoint($breakpoint) {
+      display: none !important;
+    }
+  }
+
+  .hidden-#{$breakpoint}-down {
+    @media (max-width: breakpoint-down($breakpoint)) {
+      display: none !important;
+    }
+  }
+}
+
+// Rest of the file remains the same...
+
+// Responsive flexbox utilities
+@each $breakpoint, $value in $breakpoints {
+  @include breakpoint($breakpoint) {
+    .flex-#{$breakpoint}-row { flex-direction: row !important; }
+    .flex-#{$breakpoint}-column { flex-direction: column !important; }
+    .flex-#{$breakpoint}-wrap { flex-wrap: wrap !important; }
+    .flex-#{$breakpoint}-nowrap { flex-wrap: nowrap !important; }
+  }
+}
+
+// Responsive text alignment
+@each $breakpoint, $value in $breakpoints {
+  @include breakpoint($breakpoint) {
+    .text-#{$breakpoint}-left { text-align: left !important; }
+    .text-#{$breakpoint}-center { text-align: center !important; }
+    .text-#{$breakpoint}-right { text-align: right !important; }
+  }
+}
+
+// Responsive margin and padding
+$spacers: (
+  0: 0,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 3rem
+);
+
+@each $breakpoint, $value in $breakpoints {
+  @include breakpoint($breakpoint) {
+    @each $prop, $abbrev in (margin: m, padding: p) {
+      @each $size, $length in $spacers {
+        .#{$abbrev}-#{$breakpoint}-#{$size} { #{$prop}: $length !important; }
+        .#{$abbrev}t-#{$breakpoint}-#{$size},
+        .#{$abbrev}y-#{$breakpoint}-#{$size} {
+          #{$prop}-top: $length !important;
+        }
+        .#{$abbrev}r-#{$breakpoint}-#{$size},
+        .#{$abbrev}x-#{$breakpoint}-#{$size} {
+          #{$prop}-right: $length !important;
+        }
+        .#{$abbrev}b-#{$breakpoint}-#{$size},
+        .#{$abbrev}y-#{$breakpoint}-#{$size} {
+          #{$prop}-bottom: $length !important;
+        }
+        .#{$abbrev}l-#{$breakpoint}-#{$size},
+        .#{$abbrev}x-#{$breakpoint}-#{$size} {
+          #{$prop}-left: $length !important;
+        }
+      }
+    }
+  }
+}
+
+// Container widths
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include breakpoint('sm') {
+    max-width: 540px;
+  }
+  @include breakpoint('md') {
+    max-width: 720px;
+  }
+  @include breakpoint('lg') {
+    max-width: 960px;
+  }
+  @include breakpoint('xl') {
+    max-width: 1140px;
+  }
+  @include breakpoint('xxl') {
+    max-width: 1320px;
+  }
+}
+
+// Responsive grid system (12 columns)
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    flex: 0 0 percentage($i / 12);
+    max-width: percentage($i / 12);
+  }
+}
+
+@each $breakpoint, $value in $breakpoints {
+  @include breakpoint($breakpoint) {
+    @for $i from 1 through 12 {
+      .col-#{$breakpoint}-#{$i} {
+        flex: 0 0 percentage($i / 12);
+        max-width: percentage($i / 12);
+      }
+    }
+  }
+}

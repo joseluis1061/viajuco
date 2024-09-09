@@ -2,27 +2,120 @@
 @import '../global/variables';
 @import '../global/mixins';
 
-// Colores para el tema claro (generalmente los valores por defecto de las variables)
-// Colores para el tema oscuro
-$primary-light: #2196F3; // Ajusta según tus preferencias
-$secondary-light: #607D8B;
+// src/styles/themes/_light-theme.scss
 
-// Estilos globales para el tema claro
+$light-theme: (
+  // Background colors
+  bg-primary: #ffffff,
+  bg-secondary: #f5f5f5,
+  bg-tertiary: #e0e0e0,
+
+  // Text colors
+  text-primary: #333333,
+  text-secondary: #666666,
+  text-tertiary: #999999,
+
+  // Accent colors
+  accent-primary: #6200ee,
+  accent-secondary: #03dac6,
+
+  // Status colors
+  success: #4caf50,
+  warning: #ff9800,
+  error: #f44336,
+
+  // Border colors
+  border-color: #e0e0e0,
+
+  // Shadow
+  shadow-color: rgba(0, 0, 0, 0.1),
+
+  // Input fields
+  input-bg: #ffffff,
+  input-border: #cccccc,
+  input-text: #333333,
+
+  // Buttons
+  btn-primary-bg: #6200ee,
+  btn-primary-text: #ffffff,
+  btn-secondary-bg: #e0e0e0,
+  btn-secondary-text: #333333,
+
+  // Links
+  link-color: #6200ee,
+  link-hover-color: #3700b3,
+
+  // Cards
+  card-bg: #ffffff,
+  card-border: #e0e0e0,
+
+  // Tables
+  table-header-bg: #f5f5f5,
+  table-row-bg: #ffffff,
+  table-row-alt-bg: #fafafa,
+
+  // Scrollbar
+  scrollbar-thumb: #cccccc,
+  scrollbar-track: #f5f5f5
+);
+
+// Function to easily access theme colors
+@function light-theme($key) {
+  @return map-get($light-theme, $key);
+}
+
+// Mixin to apply light theme
+@mixin light-theme {
+  background-color: light-theme(bg-primary);
+  color: light-theme(text-primary);
+
+  // Add more global styles for light theme here
+
+  // Example usage:
+  a {
+    color: light-theme(link-color);
+    &:hover {
+      color: light-theme(link-hover-color);
+    }
+  }
+
+  input, textarea, select {
+    background-color: light-theme(input-bg);
+    border-color: light-theme(input-border);
+    color: light-theme(input-text);
+  }
+
+  button.primary {
+    background-color: light-theme(btn-primary-bg);
+    color: light-theme(btn-primary-text);
+  }
+
+  button.secondary {
+    background-color: light-theme(btn-secondary-bg);
+    color: light-theme(btn-secondary-text);
+  }
+
+  .card {
+    background-color: light-theme(card-bg);
+    border-color: light-theme(card-border);
+  }
+
+  // Add more specific element styles as needed
+}
+
+// Apply light theme by default
 body {
-  background-color: $light-color;
-  color: $dark-color;
+  @include light-theme;
 }
 
-// Estilos específicos para elementos en el tema claro
-.card {
-  background-color: $light-color;
-  box-shadow: $box-shadow-sm;
+// Override with dark theme when .dark-theme class is present on body
+body:not(.dark-theme) {
+  @include light-theme;
 }
 
-// ... otros estilos específicos para el tema claro
-
-// Utilizando mixins para personalizar estilos
-// .light-button {
-  //@include background($primary-light);
-  //color: $light-color;
-// }
+// Or use a media query for system preference
+@media (prefers-color-scheme: light) {
+  body:not(.dark-theme) {
+    @include light-theme;
+  }
+}

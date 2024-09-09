@@ -2,25 +2,115 @@
 @import '../global/variables';
 @import '../global/mixins';
 
-// Colores para el tema oscuro
-// $primary-dark: #2196F3; // Ajusta según tus preferencias
-// $secondary-dark: #607D8B;
-// ... otros colores para el tema oscuro
+// src/styles/themes/_dark-theme.scss
 
-// Estilos globales para el tema oscuro
-// body {
-//   background-color: $dark-color;
-//   color: $light-color;
-// }
+$dark-theme: (
+  // Background colors
+  bg-primary: #121212,
+  bg-secondary: #1e1e1e,
+  bg-tertiary: #2c2c2c,
 
-// Estilos específicos para elementos en el tema oscuro
-// .card {
-//   background-color: $gray-800;
-//   color: $light-color;
-// }
+  // Text colors
+  text-primary: #ffffff,
+  text-secondary: #b3b3b3,
+  text-tertiary: #808080,
 
-// ... otros estilos específicos para el tema oscuro
+  // Accent colors
+  accent-primary: #bb86fc,
+  accent-secondary: #03dac6,
 
-// Utilizando mixins para personalizar estilos
-// .dark-button {
-// }
+  // Status colors
+  success: #00c853,
+  warning: #ffd600,
+  error: #cf6679,
+
+  // Border colors
+  border-color: #333333,
+
+  // Shadow
+  shadow-color: rgba(0, 0, 0, 0.3),
+
+  // Input fields
+  input-bg: #2c2c2c,
+  input-border: #454545,
+  input-text: #ffffff,
+
+  // Buttons
+  btn-primary-bg: #bb86fc,
+  btn-primary-text: #000000,
+  btn-secondary-bg: #1e1e1e,
+  btn-secondary-text: #ffffff,
+
+  // Links
+  link-color: #bb86fc,
+  link-hover-color: #03dac6,
+
+  // Cards
+  card-bg: #1e1e1e,
+  card-border: #333333,
+
+  // Tables
+  table-header-bg: #2c2c2c,
+  table-row-bg: #1e1e1e,
+  table-row-alt-bg: #252525,
+
+  // Scrollbar
+  scrollbar-thumb: #555555,
+  scrollbar-track: #1e1e1e
+);
+
+// Function to easily access theme colors
+@function dark-theme($key) {
+  @return map-get($dark-theme, $key);
+}
+
+// Mixin to apply dark theme
+@mixin dark-theme {
+  background-color: dark-theme(bg-primary);
+  color: dark-theme(text-primary);
+
+  // Add more global styles for dark theme here
+
+  // Example usage:
+  a {
+    color: dark-theme(link-color);
+    &:hover {
+      color: dark-theme(link-hover-color);
+    }
+  }
+
+  input, textarea, select {
+    background-color: dark-theme(input-bg);
+    border-color: dark-theme(input-border);
+    color: dark-theme(input-text);
+  }
+
+  button.primary {
+    background-color: dark-theme(btn-primary-bg);
+    color: dark-theme(btn-primary-text);
+  }
+
+  button.secondary {
+    background-color: dark-theme(btn-secondary-bg);
+    color: dark-theme(btn-secondary-text);
+  }
+
+  .card {
+    background-color: dark-theme(card-bg);
+    border-color: dark-theme(card-border);
+  }
+
+  // Add more specific element styles as needed
+}
+
+// Apply dark theme when .dark-theme class is present on body
+body.dark-theme {
+  @include dark-theme;
+}
+
+// Or use a media query for system preference
+@media (prefers-color-scheme: dark) {
+  body {
+    @include dark-theme;
+  }
+}
